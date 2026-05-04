@@ -282,10 +282,6 @@
             loading="lazy"
           />
         </a>
-        <p class="accreditation__note">
-          Clare is a registered member of the British Psychoanalytic Council, an
-          accredited register held by the Professional Standards Authority.
-        </p>
       </div>
     </section>
 
@@ -344,6 +340,147 @@
           c.querySelector('.contact__form')?.prepend(note);
         }
       }
+    </script>
+
+    <script>
+      // Hero: gently floating, softly colliding radial-gradient circles.
+      // Pure canvas; respects prefers-reduced-motion.
+      (function () {
+        const hero = document.querySelector('.hero');
+        if (!hero) return;
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+        if (reduced.matches) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'hero__canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+        hero.insertBefore(canvas, hero.firstChild);
+        const ctx = canvas.getContext('2d');
+        const accent = [77, 100, 87]; // var(--accent) ≈ #4d6457
+
+        let dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let w = 0, h = 0, circles = [], raf = 0, lastT = 0, running = false;
+
+        function resize() {
+          const r = hero.getBoundingClientRect();
+          w = r.width; h = r.height;
+          canvas.width = Math.round(w * dpr);
+          canvas.height = Math.round(h * dpr);
+          canvas.style.width = w + 'px';
+          canvas.style.height = h + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function seed() {
+          const target = Math.max(4, Math.min(10, Math.round((w * h) / 90000)));
+          circles = [];
+          for (let i = 0; i < target; i++) {
+            // wide spread of sizes: mostly mid-small with occasional very large
+            const radius = 80 + Math.pow(Math.random(), 1.4) * 420;
+            // larger circles cover more area, so dim them slightly
+            const sizeFactor = Math.min(1, 220 / radius);
+            circles.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              r: radius,
+              // velocities in px/sec — gentle drift
+              vx: (Math.random() - 0.5) * 5,
+              vy: -(3 + Math.random() * 7),
+              targetVy: -(4 + Math.random() * 8),
+              alpha: (0.025 + Math.random() * 0.045) * (0.7 + sizeFactor * 0.3),
+            });
+          }
+        }
+
+        function step(t) {
+          if (!running) return;
+          const dt = Math.min(0.05, (t - lastT) / 1000);
+          lastT = t;
+
+          // pairwise collisions (n is small; O(n²) is fine)
+          for (let i = 0; i < circles.length; i++) {
+            const a = circles[i];
+            for (let j = i + 1; j < circles.length; j++) {
+              const b = circles[j];
+              const dx = b.x - a.x, dy = b.y - a.y;
+              const dist = Math.hypot(dx, dy);
+              // collide when the dense centres approach — radii in gradients
+              // are mostly transparent halo, so collide at ~55% of summed radii.
+              const min = (a.r + b.r) * 0.55;
+              if (dist > 0.0001 && dist < min) {
+                const nx = dx / dist, ny = dy / dist;
+                // separate
+                const overlap = (min - dist) * 0.5;
+                a.x -= nx * overlap; a.y -= ny * overlap;
+                b.x += nx * overlap; b.y += ny * overlap;
+                // equal-mass elastic: swap normal-component velocities
+                const va = a.vx * nx + a.vy * ny;
+                const vb = b.vx * nx + b.vy * ny;
+                a.vx += (vb - va) * nx;
+                a.vy += (vb - va) * ny;
+                b.vx += (va - vb) * nx;
+                b.vy += (va - vb) * ny;
+              }
+            }
+          }
+
+          // motion + soft pull toward target buoyancy + gentle wobble
+          for (const c of circles) {
+            c.vy += (c.targetVy - c.vy) * Math.min(1, dt * 0.4);
+            c.vx += (Math.random() - 0.5) * 3 * dt;
+            c.vx *= Math.pow(0.4, dt); // damp horizontal drift
+            c.x += c.vx * dt;
+            c.y += c.vy * dt;
+            // wrap horizontally so circles don't pile against edges
+            if (c.x < -c.r) c.x = w + c.r;
+            if (c.x > w + c.r) c.x = -c.r;
+            // respawn from below when fully above the top
+            if (c.y < -c.r * 1.1) {
+              c.y = h + c.r * 1.05;
+              c.x = Math.random() * w;
+            }
+          }
+
+          // render
+          ctx.clearRect(0, 0, w, h);
+          for (const c of circles) {
+            const g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
+            g.addColorStop(0, `rgba(${accent[0]},${accent[1]},${accent[2]},${c.alpha})`);
+            g.addColorStop(1, `rgba(${accent[0]},${accent[1]},${accent[2]},0)`);
+            ctx.fillStyle = g;
+            ctx.fillRect(c.x - c.r, c.y - c.r, c.r * 2, c.r * 2);
+          }
+
+          raf = requestAnimationFrame(step);
+        }
+
+        function start() {
+          if (running) return;
+          running = true;
+          lastT = performance.now();
+          raf = requestAnimationFrame(step);
+        }
+        function stop() {
+          running = false;
+          if (raf) cancelAnimationFrame(raf);
+        }
+
+        resize();
+        seed();
+        start();
+
+        let resizeT = 0;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeT);
+          resizeT = setTimeout(() => { resize(); seed(); }, 120);
+        });
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) stop(); else start();
+        });
+        reduced.addEventListener?.('change', (e) => {
+          if (e.matches) { stop(); ctx.clearRect(0, 0, w, h); } else start();
+        });
+      })();
     </script>
   </body>
 </html>

@@ -189,20 +189,16 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: '';
+.hero__canvas {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(38rem 38rem at 88% -12%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 58%),
-    radial-gradient(26rem 26rem at 18% -8%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%),
-    radial-gradient(32rem 32rem at -8% 55%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%),
-    radial-gradient(22rem 22rem at 62% 42%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 58%),
-    radial-gradient(18rem 18rem at 32% 78%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 58%),
-    radial-gradient(28rem 28rem at 95% 90%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 58%),
-    radial-gradient(14rem 14rem at 45% 18%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 58%);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   pointer-events: none;
+  filter: blur(6px);
 }
+.hero__inner { position: relative; z-index: 1; }
 .hero__inner { position: relative; }
 .hero__title {
   max-width: 22ch;
