@@ -381,11 +381,11 @@ section[id] {
 /* ---------- contact ---------- */
 .contact__inner {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(2.5rem, 5vw, 4.5rem);
 }
 @media (min-width: 56rem) {
-  .contact__inner { grid-template-columns: 1fr 1fr; align-items: start; }
+  .contact__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
 }
 .contact__intro h2 { margin-bottom: 1.25rem; }
 .contact__details {
@@ -414,6 +414,8 @@ section[id] {
   padding: clamp(1.5rem, 3vw, 2.5rem);
   border: 1px solid var(--rule);
   border-radius: 4px;
+  min-width: 0;
+  max-width: 100%;
 }
 .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
 .field label {
@@ -433,6 +435,8 @@ section[id] {
   padding: 0.75rem 0.9rem;
   border-radius: 3px;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 .field textarea { resize: vertical; min-height: 8rem; line-height: 1.55; }
