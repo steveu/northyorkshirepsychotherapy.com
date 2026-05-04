@@ -203,6 +203,11 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
 .hero__title {
   max-width: 22ch;
   margin-bottom: 1.75rem;
+  text-wrap: balance;
+}
+.break-md { display: none; }
+@media (min-width: 36rem) {
+  .break-md { display: inline; }
 }
 .hero__lede {
   font-family: var(--serif);
@@ -387,6 +392,7 @@ section[id] {
 @media (min-width: 56rem) {
   .contact__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
 }
+.contact__intro { min-width: 0; }
 .contact__intro h2 { margin-bottom: 1.25rem; }
 .contact__details {
   list-style: none;
@@ -396,12 +402,14 @@ section[id] {
 }
 .contact__details li {
   display: grid;
-  grid-template-columns: 6.5rem 1fr;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
   gap: 1rem;
   align-items: baseline;
   padding: 0.9rem 0;
   border-bottom: 1px solid var(--rule);
 }
+.contact__details a,
+.contact__details span { overflow-wrap: anywhere; min-width: 0; }
 .contact__label {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
