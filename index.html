@@ -256,9 +256,6 @@
               <textarea id="message" name="message" rows="6" required></textarea>
             </div>
             <button type="submit" class="button">Send enquiry</button>
-            <p class="form-note">
-              I'll reply to your enquiry by email.
-            </p>
           </form>
         </div>
       </section>
@@ -349,6 +346,7 @@
         if (!hero) return;
         const reduced = matchMedia('(prefers-reduced-motion: reduce)');
         if (reduced.matches) return;
+        if (matchMedia('(max-width: 48rem)').matches) return;
 
         const canvas = document.createElement('canvas');
         canvas.className = 'hero__canvas';
