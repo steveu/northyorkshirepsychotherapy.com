@@ -194,8 +194,13 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60rem 32rem at 80% -10%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 60%),
-    radial-gradient(40rem 28rem at -10% 110%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 60%);
+    radial-gradient(38rem 38rem at 88% -12%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 58%),
+    radial-gradient(26rem 26rem at 18% -8%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%),
+    radial-gradient(32rem 32rem at -8% 55%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%),
+    radial-gradient(22rem 22rem at 62% 42%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 58%),
+    radial-gradient(18rem 18rem at 32% 78%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 58%),
+    radial-gradient(28rem 28rem at 95% 90%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 58%),
+    radial-gradient(14rem 14rem at 45% 18%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 58%);
   pointer-events: none;
 }
 .hero__inner { position: relative; }
@@ -284,6 +289,7 @@ section[id] {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  object-position: 22% 28%;
   border-radius: 2px;
   box-shadow:
     0 1px 0 rgba(0,0,0,0.04),
