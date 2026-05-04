@@ -230,11 +230,11 @@
             name="enquiry"
             method="POST"
             data-netlify="true"
-            netlify-honeypot="bot-field"
+            data-netlify-honeypot="bot-field"
             action="/?sent=1#contact"
           >
             <input type="hidden" name="form-name" value="enquiry" />
-            <p class="visually-hidden">
+            <p hidden>
               <label>Don't fill this out: <input name="bot-field" /></label>
             </p>
             <div class="field">
@@ -252,8 +252,8 @@
               />
             </div>
             <div class="field">
-              <label for="enquiry">What kind of help are you looking for?</label>
-              <textarea id="enquiry" name="enquiry" rows="6" required></textarea>
+              <label for="message">What kind of help are you looking for?</label>
+              <textarea id="message" name="message" rows="6" required></textarea>
             </div>
             <button type="submit" class="button">Send enquiry</button>
             <p class="form-note">
