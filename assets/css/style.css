@@ -464,6 +464,41 @@ section[id] {
   font-style: italic;
 }
 
+/* ---------- accreditation strip ---------- */
+.accreditation {
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  text-align: center;
+}
+.accreditation .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+.accreditation__mark {
+  display: inline-block;
+  border: 0;
+  padding: 0;
+  transition: opacity 160ms ease;
+}
+.accreditation__mark:hover { opacity: 0.78; }
+.accreditation__mark img {
+  max-width: min(28rem, 100%);
+  height: auto;
+  display: block;
+}
+.accreditation__note {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
 /* ---------- footer ---------- */
 .site-footer {
   background: var(--ink);
