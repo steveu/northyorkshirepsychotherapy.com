@@ -415,7 +415,9 @@ section[id] {
   border-bottom: 1px solid var(--rule);
 }
 .contact__details a,
-.contact__details span { overflow-wrap: anywhere; min-width: 0; }
+.contact__details span,
+.contact__details address { overflow-wrap: anywhere; min-width: 0; }
+.contact__details address { font-style: normal; }
 .contact__label {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
