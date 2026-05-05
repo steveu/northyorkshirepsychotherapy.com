@@ -15,6 +15,11 @@
   --measure: 38rem;
   --container: 70rem;
 
+  /* baseline rhythm — body 17px × 1.7 ≈ 28.9px */
+  --rhythm: 1.7rem;
+  --rhythm-half: 0.85rem;
+  --rhythm-quarter: 0.425rem;
+
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -40,7 +45,8 @@ html, body {
 body {
   font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.7;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -87,22 +93,23 @@ a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 /* ---------- type ---------- */
 h1, h2, h3 {
   font-family: var(--serif);
-  font-weight: 500;
-  letter-spacing: -0.005em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.4rem, 5.6vw, 4rem); line-height: 1.08; font-weight: 400; }
-h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.15; font-weight: 600; }
-h3 { font-size: clamp(1.4rem, 2.4vw, 1.85rem); line-height: 1.2; font-weight: 600; }
+h1 { font-size: clamp(2.5rem, 5.6vw, 4.1rem); line-height: 1.1; font-weight: 400; }
+h2 { font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.18; font-weight: 500; }
+h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.25; font-weight: 500; }
 
-p { margin: 0 0 1rem; max-width: var(--measure); }
+p { margin: 0 0 var(--rhythm-half); max-width: var(--measure); }
 
 .lede {
   font-family: var(--serif);
-  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
-  line-height: 1.45;
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  line-height: 1.5;
   color: var(--ink-soft);
   font-style: italic;
   font-weight: 400;
@@ -112,10 +119,10 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
   font-family: var(--sans);
   font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.6rem;
 }
 
 .muted { color: var(--muted); }
@@ -143,11 +150,12 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
 .wordmark {
   display: inline-flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 1.05;
   border: 0;
   color: var(--ink);
   font-family: var(--serif);
   font-size: 1.25rem;
+  letter-spacing: -0.01em;
 }
 .wordmark__line { display: block; }
 .wordmark__line--accent { color: var(--accent); font-style: italic; }
@@ -199,11 +207,9 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
   filter: blur(6px);
 }
 .hero__inner { position: relative; z-index: 1; }
-.hero__inner { position: relative; }
 .hero__title {
   max-width: 22ch;
-  margin-bottom: 1.75rem;
-  text-wrap: balance;
+  margin-bottom: var(--rhythm);
 }
 .break-md { display: none; }
 @media (min-width: 36rem) {
@@ -215,14 +221,14 @@ p { margin: 0 0 1rem; max-width: var(--measure); }
   line-height: 1.55;
   color: var(--ink-soft);
   max-width: 42rem;
-  margin-bottom: 2rem;
+  margin-bottom: calc(var(--rhythm) * 1.25);
 }
 .hero__cta {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem 2rem;
   align-items: center;
-  margin-top: 2.5rem;
+  margin-top: calc(var(--rhythm) * 1.5);
   max-width: none;
 }
 
@@ -305,7 +311,8 @@ section[id] {
   font-size: 1rem;
 }
 
-.about__body h2 { margin-bottom: 1.25rem; }
+.about__body h2 { margin-bottom: var(--rhythm); }
+.about__body .lede { margin-bottom: var(--rhythm); }
 
 /* ---------- services ---------- */
 .services .container > .section-head { margin-bottom: 3rem; }
@@ -376,11 +383,12 @@ section[id] {
   font-feature-settings: 'lnum';
 }
 .fees__note {
-  margin-top: 1.75rem;
+  margin-top: var(--rhythm);
   font-style: italic;
   color: var(--ink-soft);
   font-family: var(--serif);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 /* ---------- contact ---------- */
@@ -470,12 +478,12 @@ section[id] {
 }
 .site-footer h3 {
   color: var(--bg);
-  font-size: 1.05rem;
+  font-size: 0.82rem;
   font-family: var(--sans);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 .site-footer ul {
   list-style: none;
