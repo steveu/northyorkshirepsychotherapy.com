@@ -16,8 +16,9 @@ python3 -m http.server 8080
 
 All copy lives in `index.html`. Styling is in `assets/css/style.css`.
 
-## Contact form
+## Contact
 
-The contact form is wired up to Netlify Forms via `data-netlify="true"`.
-Submissions appear in the Netlify dashboard under **Forms → enquiry**, and
-notifications can be configured to email Clare directly.
+Enquiries go via a `mailto:` link — no form submission, no third-party
+storage. Visitors clicking "Email Clare" open a pre-addressed message in
+their own mail client, with a subject line that identifies the website as
+the source.

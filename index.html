@@ -376,38 +376,23 @@
             </ul>
           </div>
 
-          <form
-            class="contact__form"
-            name="enquiry"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-            action="/?sent=1#contact"
-          >
-            <input type="hidden" name="form-name" value="enquiry" />
-            <p hidden>
-              <label>Don't fill this out: <input name="bot-field" /></label>
+          <aside class="contact__cta" aria-labelledby="contact-cta-title">
+            <h3 id="contact-cta-title" class="contact__cta-title">Send an email</h3>
+            <p>
+              Click below to open a new message in your mail app, or copy
+              Clare's email address from the left.
             </p>
-            <div class="field">
-              <label for="name">Your name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-              />
-            </div>
-            <div class="field">
-              <label for="message">What kind of help are you looking for?</label>
-              <textarea id="message" name="message" rows="6" required></textarea>
-            </div>
-            <button type="submit" class="button">Send enquiry</button>
-          </form>
+            <p class="contact__cta-action">
+              <a
+                class="button"
+                href="mailto:clare@northyorkshirepsychotherapy.com?subject=Enquiry%20via%20northyorkshirepsychotherapy.com"
+              >Email Clare</a>
+            </p>
+            <p class="contact__cta-note">
+              Your message goes straight to Clare's inbox. This site doesn't
+              collect, store or track your enquiry.
+            </p>
+          </aside>
         </div>
       </section>
     </main>
@@ -477,16 +462,6 @@
 
     <script>
       document.getElementById('year').textContent = new Date().getFullYear();
-      if (new URLSearchParams(location.search).get('sent') === '1') {
-        const c = document.getElementById('contact');
-        if (c) {
-          const note = document.createElement('p');
-          note.className = 'form-success';
-          note.textContent =
-            'Thank you — your enquiry has been received. I will be in touch by email.';
-          c.querySelector('.contact__form')?.prepend(note);
-        }
-      }
     </script>
 
     <script>
