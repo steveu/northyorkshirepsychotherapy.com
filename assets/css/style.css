@@ -384,19 +384,17 @@ section[id] {
 }
 
 /* ---------- contact ---------- */
-.contact__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(2.5rem, 5vw, 4.5rem);
+.contact__inner { max-width: 50rem; }
+.contact__action { margin: 2rem 0 0.6rem; }
+.contact__action-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
 }
-@media (min-width: 56rem) {
-  .contact__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-}
-.contact__intro { min-width: 0; }
-.contact__intro h2 { margin-bottom: 1.25rem; }
 .contact__details {
   list-style: none;
-  margin: 2rem 0 0;
+  margin: 2.5rem 0 0;
   padding: 0;
   border-top: 1px solid var(--rule);
 }
@@ -415,23 +413,6 @@ section[id] {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-}
-
-.contact__cta {
-  background: var(--bg-2);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  min-width: 0;
-  max-width: 100%;
-}
-.contact__cta-title { margin: 0 0 0.75rem; }
-.contact__cta-action { margin: 1.5rem 0 1.25rem; }
-.contact__cta-note {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-style: italic;
 }
 
 /* ---------- accreditation strip ---------- */
