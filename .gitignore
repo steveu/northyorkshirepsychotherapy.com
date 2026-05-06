@@ -6,6 +6,11 @@
 .idea/
 *.swp
 
+# Claude Code (personal overrides only — shared config stays tracked)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/worktrees/
+
 # Node (in case tooling is added later)
 node_modules/
 
